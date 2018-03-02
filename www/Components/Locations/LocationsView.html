@@ -1,0 +1,24 @@
+﻿<div ng-controller="LocationsController" id="ordersForm" class="container" page="Orders">
+    <div class="text-center">
+        <h2>Locations</h2>
+        <br />
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-condensed table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Address</th>
+                    <th>Phone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-if="Stores.length == 0"><td colspan="4">No stores found</td></tr>
+                <tr ng-repeat="store in Stores">
+                    <td><a href="" ng-if="store.HasRoutes" ng-click="ShowStore(readyOrder.InvoiceID, ReadyOrders)">Delivery</a><a href="" ng-if="!store.HasRoutes" ng-click="ShowStore(readyOrder.InvoiceID, ReadyOrders)">{{store.PhysicalAddress.Address1}}, {{store.PhysicalAddress.City}} {{store.PhysicalAddress.State}} {{store.PhysicalAddress.Zip}}</a></td>
+                    <td>{{store.PhysicalAddress.Phone}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

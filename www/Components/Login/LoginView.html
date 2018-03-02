@@ -1,0 +1,41 @@
+﻿<ion-view view-title="Login">
+    <ion-content>
+        <div class="ccPage">
+            <div class="text-center">
+                <img src="Content/images/KONA-Family-LOGO.jpg" class="header_logo" alt="Kona Cleaners">
+                <br />
+                <br />
+            </div>
+            <form name="loginForm" novalidate>
+                <div class="form-group">
+                    <div class="input-group has-feedback" ng-class="{'has-error':loginForm.loginEmail.$invalid && loginForm.loginEmail.$dirty, 'has-success':loginForm.loginEmail.$valid && loginForm.loginEmail.$dirty}">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        <input type="email" class="form-control" ng-model="login.emailAddress" name="loginEmail" placeholder="Email Address" title="Please enter your email address." required />
+                        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" ng-if="loginForm.loginEmail.$invalid && loginForm.loginEmail.$dirty"></span>
+                        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-if="loginForm.loginEmail.$valid && loginForm.loginEmail.$dirty"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group has-feedback" ng-class="{'has-error':loginForm.loginPassword.$invalid && loginForm.loginPassword.$dirty, 'has-success':loginForm.loginPassword.$valid && loginForm.loginPassword.$dirty}">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input type="password" class="form-control" ng-model="login.password" name="loginPassword" placeholder="Password" title="Password must contain 6 to 30 characters with at least 1 capital letter and 1 number." required ng-minlength="4" ng-maxlength="30" />
+                        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" ng-if="loginForm.loginPassword.$invalid && loginForm.loginPassword.$dirty"></span>
+                        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-if="loginForm.loginPassword.$valid && loginForm.loginPassword.$dirty"></span>
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="login.rememberEmail">&nbsp;&nbsp;Remember my email address.</input>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="btn-block"><input type="submit" class="btn full-width btn-success" data-role="button" value="Log In" ng-click="loginUser();" ng-disabled="!loginForm.$valid" /></div>
+                    <div class="btn-block"><input type="submit" class="btn full-width btn-primary" data-role="button" value="Sign Up" ng-click="createAccount();" /></div>
+                    <div class="btn-block"><a ng-click="forgotPassword();" ng-disabled="!loginForm.loginEmail.$valid">Forgot Password?</a></div>
+                </div>
+            </form>
+        </div>
+    </ion-content>
+</ion-view>

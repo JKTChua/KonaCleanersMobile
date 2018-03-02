@@ -1,0 +1,213 @@
+﻿<ion-view view-title="Account">
+    <ion-content>
+        <div ng-controller="AccountController" id="accountForm" class="ccPage" page="Account">
+            <div class="text-center">
+                <h2>Account Information</h2>
+                <br />
+            </div>
+            <form name="accountForm" novalidate>
+                <div class="form-group">
+                    <label class="btn btn-success" ng-click="changePass.open();">Change Password</label>
+                    <label class="btn btn-default" ng-click="customerReferral()" ng-show="Settings.General['Customer Referral']['Enable Customer Referral'] == 1 && Customer.ShowReferral">Refer a friend</label>
+                </div>
+                <h3>Basic</h3>
+                <div class="form-group">
+                    <div class="input-group has-feedback" ng-class="{'has-error':basicForm.email.$invalid && basicForm.email.$dirty, 'has-success':basicForm.email.$valid && basicForm.email.$dirty}">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        <input type="email" id="emailAddress" name="email" ng-model="Customer.EmailAddress" class="form-control" placeholder="Email Address (Required)" required />
+                        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" ng-if="basicForm.email.$invalid && basicForm.email.$dirty"></span>
+                        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-if="basicForm.email.$valid && basicForm.email.$dirty"></span>
+                    </div>
+
+                    <div class="input-group has-feedback" ng-class="{'has-error':basicForm.firstname.$invalid && basicForm.firstname.$dirty, 'has-success':basicForm.firstname.$valid && basicForm.firstname.$dirty}">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id="firstName" name="firstname" ng-model="Customer.FirstName" class="form-control" placeholder="First Name (Required)" required />
+                        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" ng-if="basicForm.firstname.$invalid && basicForm.firstname.$dirty"></span>
+                        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-if="basicForm.firstname.$valid && basicForm.firstname.$dirty"></span>
+                    </div>
+                    <div class="input-group has-feedback" ng-class="{'has-error':basicForm.lastname.$invalid && basicForm.lastname.$dirty, 'has-success':basicForm.lastname.$valid && basicForm.lastname.$dirty}">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id="lastName" name="lastname" ng-model="Customer.LastName" class="form-control" placeholder="Last Name (Required)" required />
+                        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" ng-if="basicForm.lastname.$invalid && basicForm.lastname.$dirty"></span>
+                        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-if="basicForm.lastname.$valid && basicForm.lastname.$dirty"></span>
+                    </div>
+
+                    <div class="form-group" style="display:table-row;">
+                        <span class="input-group-addon" style="display:table-cell"><label class="glyphicon glyphicon-calendar">&nbsp;Birthday</label></span>
+                        <select class="form-control sidebyside" ng-model="birthMonth" ng-options="n for n in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]">
+                            <option value="" selected disabled>Month</option>
+                        </select>
+                        <select class="form-control sidebyside" ng-model="birthDate" ng-options="n for n in birthDays">
+                            <option value="" selected disabled>Day</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Rewards Points:&nbsp;&nbsp;</label>{{ Customer.FBPoints }}
+                    <br />
+                    <label class="control-label">Available Cash Credit:&nbsp;&nbsp;</label>{{ Customer.CashCreditBalance | currency}}
+                    <br />
+                    <label class="control-label">Locker PIN:&nbsp;&nbsp;</label>{{ Customer.LockerPIN }}
+                </div>
+
+                <h3>Phones</h3>
+                <div class="form-group" ng-repeat="phone in Customer.Phones" style="display:table-row;">
+                    <span class="input-group-addon" style="display:table-cell"><label class="glyphicon glyphicon-phone"></label></span>
+                    <input id="phoneNumber" name="phonenumber" ng-model="phone.Number" class="form-control sidebyside" placeholder="{{ Settings.General['Phone Mask'] }}" tooltip="{{ Settings.General['Phone Mask'] }}" tooltip-trigger="focus" type="tel" required ng-pattern="/^[0-9]{10}$/" ui-mask="(999) 999-9999" />
+
+                    <select ng-model="phone.PhoneType" class="form-control sidebyside">
+                        <option disabled>Choose Type</option>
+                        <option>Home</option>
+                        <option value="Cell/Mobile">Mobile</option>
+                        <option>Work</option>
+                        <option>Other</option>
+                        <option>Principal</option>
+                    </select>
+                    <div class="input-group-addon" ng-click="RemovePhone($index); accountForm.$setDirty();"><label class="glyphicon glyphicon-trash"></label></div>
+                </div>
+
+                <div class="form-group">
+                    <br />
+                    <div class="input-group btn btn-info" ng-if="Customer.Phones.length < 5" ng-click="AddPhone(); accountForm.$setDirty();">
+                        <label class="glyphicon glyphicon-plus"></label><label>&nbsp;&nbsp;Add Phone</label>
+                    </div>
+                </div>
+
+                <h3>Addresses</h3>
+                <div class="form-group">
+                    <div class="form-group">
+                        <h4>Primary</h4>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                            <input id="address1" ng-model="Customer.PrimaryAddress.Address1" class="form-control" placeholder="Address 1" aria-describedby="add1" />
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                            <input id="address2" ng-model="Customer.PrimaryAddress.Address2" class="form-control" placeholder="Address 2" />
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                            <input id="city" ng-model="Customer.PrimaryAddress.City" class="form-control" placeholder="City" />
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                            <input id="state" ng-model="Customer.PrimaryAddress.State" class="form-control" placeholder="State Abbreviation" maxlength="2" />
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                            <input id="zip" ng-model="Customer.PrimaryAddress.Zip" class="form-control" placeholder="Postal Code (#####)" maxlength="5" />
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="Settings['Account Update']['Show Delivery Address'] == 1">
+                        <h4>Delivery</h4>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                            <input id="address1" ng-model="Customer.DeliveryAddress.Address1" class="form-control" placeholder="Address 1" aria-describedby="add1" />
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                            <input id="address2" ng-model="Customer.DeliveryAddress.Address2" class="form-control" placeholder="Address 2" />
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                            <input id="city" ng-model="Customer.DeliveryAddress.City" class="form-control" placeholder="City" />
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                            <input id="state" ng-model="Customer.DeliveryAddress.State" class="form-control" placeholder="State Abbreviation" maxlength="2" />
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                            <input id="zip" ng-model="Customer.DeliveryAddress.Zip" class="form-control" placeholder="Postal Code (#####)" maxlength="5" />
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="Settings['Account Update']['Show Billing Address'] == 1">
+                        <h4>Billing</h4>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                            <input id="address1" ng-model="Customer.BillingAddress.Address1" class="form-control" placeholder="Address 1" aria-describedby="add1" />
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                            <input id="address2" ng-model="Customer.BillingAddress.Address2" class="form-control" placeholder="Address 2" />
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                            <input id="city" ng-model="Customer.BillingAddress.City" class="form-control" placeholder="City" />
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                            <input id="state" ng-model="Customer.BillingAddress.State" class="form-control" placeholder="State Abbreviation" maxlength="2" />
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                            <input id="zip" ng-model="Customer.BillingAddress.Zip" class="form-control" placeholder="Postal Code (#####)" maxlength="5" />
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Credit Card</h3>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
+                        <input id="creditcardnumber" class="form-control" ng-model="Customer.CreditCards[0].CardInfo" placeholder="Card Number" />
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        <input id="makePaymentExpiration" class="form-control" ng-model="Customer.CreditCards[0].CardExpiration" ccexpirationformatter placeholder="MM/YY" />
+                    </div>
+                </div>
+
+                <h3>Notifications</h3>
+                <div class="form-group">
+                    <div ng-repeat="notification in Settings.Notifications track by notification.name">
+                        <label class="form-label">{{ notification.description }}</label>
+                        <select ng-model="notification.selectedMethod" ng-options="method.name for method in notification.methods track by method.name" ng-change="changeNotification(notification)" class="form-control">
+                        </select>
+                    </div>
+                </div>
+
+                <h3>Preferences</h3>
+                <div class="form-group">
+                    <div class="list-group">
+                        <div ng-repeat="preference in Customer.Preferences">
+                            <div class="form-control">
+                                <span>{{ preference.Description }}</span>
+                                <span class="pull-right">{{ preference.Value }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <label class="control-label">Change preference:</label>
+                    <select class="form-control" ng-model="Preferences" ng-options="pref.Value group by pref.Description for pref in Settings.Preferences" ng--change="changePreference()"></select>
+                </div>
+
+                <div class="form-group" style="text-align: center;">
+                    <input type="button" class="btn btn-danger" value="Undo Changes" ng-click="UndoChanges(); accountForm.$setPristine();" ng-disabled="!accountForm.$dirty" />
+                    <input type="submit" class="btn btn-success" value="Save" ng-click="SaveAccount();" ng-disabled="!accountForm.$dirty" />
+                </div>
+            </form>
+        </div>
+    </ion-content>
+</ion-view>

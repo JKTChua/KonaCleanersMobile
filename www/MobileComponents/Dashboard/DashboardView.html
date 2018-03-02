@@ -1,0 +1,30 @@
+﻿<ion-view view-title="Dashboard">
+    <ion-content>
+        <div id="accountForm" class="ccPage" page="Dashboard">
+            <div class="text-center">
+                <img src="Content/images/KONA-Family-LOGO.jpg" class="header_logo" alt="Kona Cleaners">
+                <br />
+                <br />
+            </div>
+            <form name="dashboardForm" novalidate>
+                <div class="form-group">
+                    <div class="btn-block"><input type="submit" class="btn full-width btn-success btn-lg" data-role="button" value="Locations" ui-sref="app.locations" /></div>
+                    <div class="btn-block"><input type="submit" class="btn full-width btn-success btn-lg" data-role="button" value="Free Pickup & Delivery" ui-sref="app.pickup" /></div>
+                    <div class="btn-block"><input type="submit" class="btn full-width btn-success btn-lg" data-role="button" value="Services" ui-sref="app.services" /></div>
+                    <div class="btn-block"><input type="submit" class="btn full-width btn-success btn-lg" data-role="button" value="About Us" ui-sref="app.about" /></div>
+                    <div class="btn-block"><input type="submit" class="btn full-width btn-success btn-lg" data-role="button" value="Specials & Promotions" ui-sref="app.specials" /></div>
+                    <div class="btn-block"><a type="submit" class="btn full-width btn-warning btn-lg" data-role="button" ng-click="openMyAccount()">My Account</a></div>
+                    <div class="btn-group btn-group-justified btn-block">
+                        <a type="submit" class="btn btn-primary btn-lg" data-role="button" href="tel:+17146851900"><span class="glyphicon glyphicon-earphone"></span>&nbsp;&nbsp;Call</a>
+                        <a type="submit" class="btn btn-primary btn-lg" data-role="button" href="mailto:aloha@konacleaners.com"><span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;Email</a>
+                    </div>
+                </div>
+            </form>
+            <div class="text-center">
+                <a ui-sref="app.services"><img src="Content/images/greenearth.png" alt="Green Earth Cleaning"></a>
+                <br />
+                <br />
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

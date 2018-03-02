@@ -1,0 +1,18 @@
+﻿<ion-view view-title="Specials">
+    <ion-content>
+        <div id="specials" class="ccPage" page="Specials">
+            <div class="text-center">
+                <img src="Content/images/KONA-Family-LOGO.jpg" class="header_logo" alt="Kona Cleaners">
+                <br />
+                <h2>Specials</h2>
+                <br />
+            </div>
+
+            <div class="list-group">
+                <div ng-repeat="special in Specials" ng-click="openSpecial(special);" class="list-group-item pointer">
+                    {{special.specialTitle}}
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

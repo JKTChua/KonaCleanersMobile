@@ -1,0 +1,21 @@
+﻿<ion-view view-title="Dashboard">
+    <ion-content>
+        <div id="accountForm" class="ccPage" page="Dashboard">
+            <div class="text-center">
+                <img src="Content/images/KONA-Family-LOGO.jpg" class="header_logo" alt="Kona Cleaners">
+                <br />
+                <br />
+            </div>
+            <form name="dashboardForm" novalidate>
+                <div class="form-group">
+                    <div ng-show="(Customer.RouteName || Settings.Pickup['Allow Non-Route Pickup'] == 1) && Settings.General['Route Scheduling'] == 1 && Settings.Pickup['Menu Synonym']" class="btn-block"><input type="submit" class="btn full-width btn-warning btn-lg" data-role="button" value="Request Pickup" ui-sref="app.ccpickup" /></div>
+                    <div class="btn-block"><input type="submit" class="btn full-width btn-success btn-lg" data-role="button" value="My Orders" ui-sref="app.ccorders" /></div>
+                    <div class="btn-block"><input type="submit" class="btn full-width btn-success btn-lg" data-role="button" value="My Account" ui-sref="app.ccaccount" /></div>
+                    <div class="btn-block"><input type="submit" class="btn full-width btn-success btn-lg" data-role="button" value="Refer a friend" ui-sref="app.ccreferral" /></div>
+                    <!-- <div class="btn-block"><input type="submit" class="btn full-width btn-success btn-lg" data-role="button" value="Locations" ui-sref="locations" /></div> -->
+                    <div class="btn-block"><input ng-controller="SendMessageController" ng-click="open();" type="submit" class="btn full-width btn-success btn-lg" data-role="button" value="Contact Us" /></div>
+                </div>
+            </form>
+        </div>
+    </ion-content>
+</ion-view>

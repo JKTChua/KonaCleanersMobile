@@ -1,0 +1,23 @@
+<ion-view view-title="{{selected.storeTitle}}">
+    <ion-content>
+        <div class="ccPage" page="Store">
+            <div class="text-center">
+                <img ng-src="{{selected.storeImage}}" class="header_logo" alt="Kona Cleaners">
+                <br />
+                <br />
+            </div>
+            <h3>{{selected.storeTitle}}</h3>
+            <div class="panel panel-default">
+                <div class="panel-heading">Hours</div>
+                <div class="panel-body">
+                    <div ng-repeat="hours in selected.storeHours">{{hours}}</div>
+                </div>
+            </div>
+            <div class="btn-group btn-group-justified btn-block">
+                <a type="submit" class="btn btn-primary btn-lg" data-role="button" href="tel:+{{selected.storePhone}}"><span class="glyphicon glyphicon-earphone"></span>&nbsp;&nbsp;Call</a>
+                <a type="submit" class="btn btn-primary btn-lg" data-role="button" href="mailto:{{selected.storeEmail}}"><span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;Email</a>
+            </div>
+            <div class="btn-block"><a type="submit" class="btn full-width btn-primary btn-lg" data-role="button" target="blank_" href="{{selected.storeMapLink}}"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;Map</a></div>
+        </div>
+    </ion-content>
+</ion-view>

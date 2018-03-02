@@ -1,0 +1,66 @@
+#discountamt {
+	background-color: #490d67;
+	line-height: 100px;
+	margin-top: -50px;
+	height: 100px;
+	width: 100px;
+	border-radius: 100%;
+	display: inline-block;
+	border: 6px solid white;
+	margin-left: 10px;
+}
+#loginmessage {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+#shareButtonsContainer {
+	width: 170px;
+	margin: auto;
+}
+.shareButton {
+	width: 50px;
+	height: 50px;
+	float: left;
+	color: #fff;
+	font-size: 30px;
+	text-align: center;
+	border-radius: 25px;
+	cursor: pointer;
+	-moz-transition: all .2s ease-in;
+	-o-transition: all .2s ease-in;
+	-webkit-transition: all .2s ease-in;
+	transition: all .2s ease-in;
+}
+.shareButton:hover {
+	border-radius: 14px;
+}
+.shareButton i {
+	line-height: 50px;
+}
+#shareFacebook {
+	background-color: #3b5998;
+}
+#shareTwitter {
+	background-color: #00aced;
+}
+#shareEmail {
+	background-color: #3baf29;
+}
+.buttonDivider {
+	width: 10px;
+	height: 50px;
+	float: left;
+}
+@media (min-width:360px) and (max-width:625px) {
+	.viewport {
+		width: 80%;
+		margin: auto;
+	}
+}
+@media (max-width:359px) {
+	.viewport {
+		width: 288px;
+		margin: auto;
+	}
+}

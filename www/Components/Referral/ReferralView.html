@@ -1,0 +1,27 @@
+﻿<ion-view view-title="Referrals">
+    <ion-content>
+        <div id="referralForm" class="container" page="Referrals">
+            <div class="text-center">
+                <h2>Refer a friend</h2>
+                <br />
+            </div>
+
+            <div id="shareButtons">
+                <div id="loginmessage">
+                    <center>Sign up at Kona Cleaners and we both get rewards!</center>
+                </div>
+                <center>
+                    Share your code:<br>
+                    <strong id="referralCode">{{customerKey}}</strong>
+                    <img src="{{customerKeyBarcode}}">
+                </center>
+                <br>
+                <div id="shareButtonsContainer">
+                    <center><div class="btn btn-success" ng-click="ShareAll()">
+                        Share Now
+                    </div></center>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

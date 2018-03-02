@@ -1,0 +1,16 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">{{clickedSpecial.specialTitle}}</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeSpecial()">Close</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <div class="modal-body">
+            <img class="full-width" src="{{clickedSpecial.specialImage}}">
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" ng-click="closeSpecial()">Close</button>
+        </div>
+    </ion-content>
+</ion-modal-view>
